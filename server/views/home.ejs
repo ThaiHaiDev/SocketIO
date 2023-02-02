@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo Socket IO</title>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        var socket = io('http://localhost:3000/');
+    </script>
+</head>
+<body>
+    <div id="mrA">
+        Click send
+    </div>
+    <h2 id="content"></h2>
+    <script>
+        var A = document.getElementById('mrA');
+        var dataReceiveFromServer = document.getElementById('content');
+
+        A.addEventListener("click", () => {
+            socket.emit("Client-send-data", "HELLO")
+        })
+
+        socket.on("Server-send-data", (data) => {
+            dataReceiveFromServer.append(data)
+        })
+    </script>
+</body>
+</html>
